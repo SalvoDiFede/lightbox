@@ -82,13 +82,14 @@ EkkoLightbox.prototype = {
 				$(document).on 'keydown.ekkoLightbox', @navigate.bind(@)
 
 				# add the directional arrows to the modal
+				# navigation binding via data-role attribute
 				if @options.directional_arrows && @gallery_items.length > 1
-					@lightbox_container.prepend('<div class="ekko-lightbox-nav-overlay"><a href="#" class="'+@strip_stops(@options.left_arrow_class)+'"></a><a href="#" class="'+@strip_stops(@options.right_arrow_class)+'"></a></div>')
+					@lightbox_container.prepend('<div class="ekko-lightbox-nav-overlay"><a data-role="left" href="#" class="'+@strip_stops(@options.left_arrow_class)+'"></a><a data-role="right" href="#" class="'+@strip_stops(@options.right_arrow_class)+'"></a></div>')
 					@modal_arrows = @lightbox_container.find('div.ekko-lightbox-nav-overlay').first()
-					@lightbox_container.find('a'+@strip_spaces(@options.left_arrow_class)).on 'click', (event) =>
+					@lightbox_container.find('a[data-role="left"]').on 'click', (event) =>
 						event.preventDefault()
 						do @navigate_left
-					@lightbox_container.find('a'+@strip_spaces(@options.right_arrow_class)).on 'click', (event) =>
+					@lightbox_container.find('a[data-role="right"]').on 'click', (event) =>
 						event.preventDefault()
 						do @navigate_right
 
